@@ -148,7 +148,7 @@ app.get("/logout", function(req, res){
 });
 
 // Listening
-const port=3000 || process.env.PORT;
+const port=(process.env.PORT || 3000);
 app.listen(port,function(err){
     console.log(`Listening at port ${port}`);
 })
