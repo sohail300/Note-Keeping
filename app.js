@@ -83,25 +83,25 @@ app.get('/login',function(req,res){
 //     })
 // })
 
-// app.post('/login',function(req,res){
-//     const email= req.body.email;
-//     const password= req.body.password;
-//     // const password= md5(req.body.password);     // Used for md5 protection
+app.post('/login',function(req,res){
+    const email= req.body.email;
+    const password= req.body.password;
+    // const password= md5(req.body.password);     // Used for md5 protection
     
-//     User.findOne({email: email},function(err,foundUser){
-//         if(err){
-//             console.log(err);
-//         } else {
-//             if(foundUser){
-//                 bcrypt.compare(password,foundUser.password, function(err,result){
-//                     if(result===true){
-//                         res.render('secrets');
-//                     }
-//                 })
-//             }
-//         }
-//     })
-// })
+    User.findOne({email: email},function(err,foundUser){
+        if(err){
+            console.log(err);
+        } else {
+            if(foundUser){
+                bcrypt.compare(password,foundUser.password, function(err,result){
+                    if(result===true){
+                        res.render('secrets');
+                    }
+                })
+            }
+        }
+    })
+})
 
 // Used for Passport Encryption
 app.get('/secrets',function(req,res){
@@ -125,22 +125,22 @@ app.post('/register',function(req,res){
         });
 })
 
-app.post('/login',function(req,res){
-    const user=new User({
-        email: req.body.email,
-        password: req.body.password,
-    })
+// app.post('/login',function(req,res){
+//     const user=new User({
+//         email: req.body.email,
+//         password: req.body.password,
+//     })
 
-    req.login(user,function(err){
-        if(err){
-            console.log(err);
-        } else {
-            passport.authenticate('local')(req,res,function(){
-                res.redirect('/secrets');
-            });
-        }
-    })
-})
+//     req.login(user,function(err){
+//         if(err){
+//             console.log(err);
+//         } else {
+//             passport.authenticate('local')(req,res,function(){
+//                 res.redirect('/secrets');
+//             });
+//         }
+//     })
+// })
 
 app.get("/logout", function(req, res){
   req.logout();
